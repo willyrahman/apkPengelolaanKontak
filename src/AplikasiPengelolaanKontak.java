@@ -25,21 +25,532 @@ public class AplikasiPengelolaanKontak extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        nameInput = new javax.swing.JTextField();
+        handphoneInput = new javax.swing.JTextField();
+        alamatInput = new javax.swing.JTextField();
+        genderPilih = new javax.swing.JComboBox<>();
+        kategoriPilih = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblKontak = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        cariInput = new javax.swing.JTextField();
+        simpanButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
+        hapusButton = new javax.swing.JButton();
+        tambahButton = new javax.swing.JButton();
+        eksporButton = new javax.swing.JButton();
+        imporButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        kontakList = new javax.swing.JList<>();
+        cariButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(51, 204, 255)), "APLIKASI PENGELOLAAN KONTAK", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel1.setText("Nama ");
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel2.setText("No. HP ");
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel3.setText("Alamat ");
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel4.setText("Kategori ");
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel5.setText("Gender ");
+
+        alamatInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alamatInputActionPerformed(evt);
+            }
+        });
+
+        genderPilih.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-Laki", "Perempuan" }));
+
+        kategoriPilih.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Keluarga", "Teman", "Kerja" }));
+
+        tblKontak.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nama", "No.HP", "Alamat", "Gender", "Kategori"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblKontak);
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel6.setText("CARI");
+
+        cariInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariInputActionPerformed(evt);
+            }
+        });
+
+        simpanButton.setBackground(new java.awt.Color(255, 153, 153));
+        simpanButton.setFont(new java.awt.Font("MingLiU_HKSCS-ExtB", 1, 12)); // NOI18N
+        simpanButton.setText("SIMPAN");
+        simpanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpanButtonActionPerformed(evt);
+            }
+        });
+
+        editButton.setBackground(new java.awt.Color(255, 153, 153));
+        editButton.setFont(new java.awt.Font("MingLiU_HKSCS-ExtB", 1, 12)); // NOI18N
+        editButton.setText("EDIT");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
+
+        hapusButton.setBackground(new java.awt.Color(255, 153, 153));
+        hapusButton.setFont(new java.awt.Font("MingLiU_HKSCS-ExtB", 1, 12)); // NOI18N
+        hapusButton.setText("HAPUS");
+        hapusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusButtonActionPerformed(evt);
+            }
+        });
+
+        tambahButton.setBackground(new java.awt.Color(255, 153, 153));
+        tambahButton.setFont(new java.awt.Font("MingLiU_HKSCS-ExtB", 1, 12)); // NOI18N
+        tambahButton.setText("TAMBAH");
+        tambahButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahButtonActionPerformed(evt);
+            }
+        });
+
+        eksporButton.setBackground(new java.awt.Color(255, 153, 153));
+        eksporButton.setFont(new java.awt.Font("MingLiU_HKSCS-ExtB", 1, 12)); // NOI18N
+        eksporButton.setText("EKSPOR");
+        eksporButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eksporButtonActionPerformed(evt);
+            }
+        });
+
+        imporButton.setBackground(new java.awt.Color(255, 153, 153));
+        imporButton.setFont(new java.awt.Font("MingLiU_HKSCS-ExtB", 1, 12)); // NOI18N
+        imporButton.setText("IMPOR");
+        imporButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imporButtonActionPerformed(evt);
+            }
+        });
+
+        kontakList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                kontakListMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(kontakList);
+
+        cariButton.setBackground(new java.awt.Color(255, 153, 153));
+        cariButton.setFont(new java.awt.Font("MingLiU_HKSCS-ExtB", 1, 12)); // NOI18N
+        cariButton.setText("CARI");
+        cariButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariButtonActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(255, 153, 153));
+        jButton1.setFont(new java.awt.Font("MingLiU_HKSCS-ExtB", 1, 12)); // NOI18N
+        jButton1.setText("Keluar");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tambahButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(simpanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(genderPilih, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(alamatInput, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(handphoneInput, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nameInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                                    .addComponent(kategoriPilih, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(251, 251, 251)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(eksporButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(imporButton))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(hapusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(cariInput, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(cariButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(nameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(handphoneInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(alamatInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(genderPilih, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(kategoriPilih, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tambahButton)
+                            .addComponent(editButton)
+                            .addComponent(simpanButton)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(eksporButton)
+                            .addComponent(imporButton))))
+                .addGap(18, 18, 18)
+                .addComponent(hapusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(cariInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cariButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(52, 52, 52))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void alamatInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alamatInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alamatInputActionPerformed
+
+    private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
+        // Ambil data dari field input
+        String nama = nameInput.getText();
+        String telepon = handphoneInput.getText();
+        String alamat = alamatInput.getText();
+        String gender = genderPilih.getSelectedItem().toString();
+        String kategori = kategoriPilih.getSelectedItem().toString();
+
+        // Periksa apakah field input sudah diisi semua
+        if (nama.isEmpty() || telepon.isEmpty() || alamat.isEmpty() || gender.equals("") || kategori.equals("")) {
+            JOptionPane.showMessageDialog(this, "Harap isi semua field!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Simpan data ke database
+        String sql = "INSERT INTO kontak (nama, telepon, alamat, gender, kategori) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = PengelolaanKontakHelper.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, nama);
+            pstmt.setString(2, telepon);
+            pstmt.setString(3, alamat);
+            pstmt.setString(4, gender);
+            pstmt.setString(5, kategori);
+            pstmt.executeUpdate();
+
+            // Beri notifikasi ke pengguna
+            JOptionPane.showMessageDialog(this, "Data berhasil disimpan!", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Gagal menyimpan data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        // Mengosongkan field input setelah berhasil disimpan
+        nameInput.setText("");
+        handphoneInput.setText("");
+        alamatInput.setText("");
+        genderPilih.setSelectedIndex(0);
+        kategoriPilih.setSelectedIndex(0);
+        nameInput.requestFocus();
+    }//GEN-LAST:event_simpanButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        int selectedRow = tblKontak.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih kontak yang ingin diedit!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String nama = nameInput.getText();
+        String telepon = handphoneInput.getText();
+        String alamat = alamatInput.getText();
+        String gender = genderPilih.getSelectedItem().toString();
+        String kategori = kategoriPilih.getSelectedItem().toString();
+        String oldName = tblKontak.getValueAt(selectedRow, 0).toString();
+
+        // Warning muncul jika semua textfield kosong atau salah satunya
+        if (nama.isEmpty() || telepon.isEmpty() || kategori.equals("(Pilih Kategori Disini)")) {
+            JOptionPane.showMessageDialog(this, "Semua field harus diisi!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Memulai proses update kontak
+        String sql = "UPDATE kontak SET nama = ?, telepon = ?, alamat = ?, gender = ?, kategori = ? WHERE nama = ?";
+        try (Connection conn = PengelolaanKontakHelper.connect();
+            java.sql.PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, nama);
+            pstmt.setString(2, telepon);
+            pstmt.setString(5, kategori);
+            pstmt.setString(6, oldName);
+            pstmt.executeUpdate();
+
+            JOptionPane.showMessageDialog(this, "Kontak berhasil diperbarui.");
+            clearFields(); //Method hapus
+            loadTableData(); // Memuat ulang data setelah di update
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Terjadi kesalahan pada pembaharuan kontak: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
+
+    }//GEN-LAST:event_hapusButtonActionPerformed
+
+    private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
+        nameInput.setText("");
+        handphoneInput.setText("");
+        alamatInput.setText("");
+        genderPilih.setSelectedIndex(0); // Default memilih item pertama
+        kategoriPilih.setSelectedIndex(0); // Default memilih item pertama
+        nameInput.requestFocus(); // Fokus pada input nama
+    }//GEN-LAST:event_tambahButtonActionPerformed
+
+    private void eksporButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eksporButtonActionPerformed
+        // Membuka JFileChooser untuk memilih lokasi dan nama file
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Simpan sebagai CSV");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV Files", "csv");
+        fileChooser.setFileFilter(filter);
+
+        int userSelection = fileChooser.showSaveDialog(this);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+
+            // Jika ekstensi file tidak ditentukan, tambahkan .csv secara otomatis
+            if (!fileToSave.getName().endsWith(".csv")) {
+                fileToSave = new File(fileToSave.getAbsolutePath() + ".csv");
+            }
+
+            // Menyimpan data dari JTable ke dalam file CSV
+            try (FileWriter writer = new FileWriter(fileToSave)) {
+                // Mendapatkan model dari JTable
+                JTable table = tblKontak; // Ganti dengan nama tabel Anda
+                int rowCount = table.getRowCount();
+                int columnCount = table.getColumnCount();
+
+                // Menulis header kolom
+                for (int col = 0; col < columnCount; col++) {
+                    writer.append(table.getColumnName(col));
+                    if (col < columnCount - 1) writer.append(",");
+                }
+                writer.append("\n");
+
+                // Menulis data dari JTable
+                for (int row = 0; row < rowCount; row++) {
+                    for (int col = 0; col < columnCount; col++) {
+                        Object cellValue = table.getValueAt(row, col);
+                        writer.append(cellValue != null ? cellValue.toString() : "");
+                        if (col < columnCount - 1) writer.append(",");
+                    }
+                    writer.append("\n");
+                }
+
+                // Berhasil mengekspor
+                JOptionPane.showMessageDialog(this, "Data berhasil diekspor ke: " + fileToSave.getAbsolutePath());
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menyimpan file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_eksporButtonActionPerformed
+
+    private void imporButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imporButtonActionPerformed
+        // Membuka JFileChooser untuk memilih file CSV
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Pilih File CSV untuk Diimpor");
+        int userSelection = fileChooser.showOpenDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToImport = fileChooser.getSelectedFile();
+
+            try (BufferedReader reader = new BufferedReader(new FileReader(fileToImport))) {
+                String line;
+                // Lewati baris header
+                reader.readLine();
+
+                // Menyiapkan koneksi ke database
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pbo_db", "root", "password"); // Sesuaikan kredensial
+                String sql = "INSERT INTO kontak (nama, noHp, alamat, gender, kategori) VALUES (?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+
+                // Membaca baris-baris dari file CSV dan menyimpannya ke dalam database
+                while ((line = reader.readLine()) != null) {
+                    String[] data = line.split(",");
+                    pstmt.setString(1, data[0]); // nama
+                    pstmt.setString(2, data[1]); // noHp
+                    pstmt.setString(5, data[4]); // kategori
+                    pstmt.executeUpdate(); // Eksekusi query untuk memasukkan data ke database
+                }
+
+                JOptionPane.showMessageDialog(this, "Data berhasil diimpor!");
+                conn.close();
+            } catch (SQLException | IOException e) {
+                JOptionPane.showMessageDialog(this, "Terjadi kesalahan: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_imporButtonActionPerformed
+
+    private void kontakListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kontakListMouseClicked
+        String selectedName = kontakList.getSelectedValue();  // Mendapatkan nama yang dipilih dari kontakList
+        if (selectedName != null) {  // Pastikan ada nama yang dipilih
+            try (Connection conn = PengelolaanKontakHelper.connect()) {
+                // Query untuk mengambil data berdasarkan nama
+                String query = "SELECT * FROM kontak WHERE nama = ?";
+                var ps = conn.prepareStatement(query);
+                ps.setString(1, selectedName);  // Set nama yang dipilih sebagai parameter
+                var rs = ps.executeQuery();
+
+                var model = (DefaultTableModel) tblKontak.getModel();
+                model.setRowCount(0);  // Reset tabel sebelum mengisi dengan data baru
+
+                if (rs.next()) {
+                    // Menambahkan data yang diambil dari database ke dalam tabel
+                    Object[] row = {
+                        rs.getString("nama"),
+                        rs.getString("telepon"),
+                        rs.getString("alamat"),
+                        rs.getString("gender"),
+                        rs.getString("kategori")
+                    };
+                    model.addRow(row);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Kontak tidak ditemukan.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Gagal memuat data kontak: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_kontakListMouseClicked
+
+    private void cariButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariButtonActionPerformed
+        String searchQuery = cariInput.getText().trim(); // Ambil input pencarian
+
+        if (searchQuery.isEmpty()) { // Jika input pencarian kosong
+            JOptionPane.showMessageDialog(this, "Masukkan nama atau nomor telepon untuk mencari!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Memulai pencarian berdasarkan nama atau nomor telepon
+        DefaultTableModel model = (DefaultTableModel) tblKontak.getModel();
+        model.setRowCount(0); // Reset tabel sebelum memasukkan hasil pencarian
+
+        String sql = "SELECT nama, telepon, alamat, gender, kategori FROM kontak WHERE nama LIKE ? OR telepon LIKE ?";
+        try (Connection conn = PengelolaanKontakHelper.connect();
+            java.sql.PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, "%" + searchQuery + "%"); // Pencarian berdasarkan nama
+            pstmt.setString(2, "%" + searchQuery + "%"); // Pencarian berdasarkan nomor telepon
+            java.sql.ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("nama"),
+                    rs.getString("telepon"),
+                    rs.getString("kategori")
+                });
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Gagal mencari kontak: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_cariButtonActionPerformed
+
+    private void cariInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cariInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,5 +588,30 @@ public class AplikasiPengelolaanKontak extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField alamatInput;
+    private javax.swing.JButton cariButton;
+    private javax.swing.JTextField cariInput;
+    private javax.swing.JButton editButton;
+    private javax.swing.JButton eksporButton;
+    private javax.swing.JComboBox<String> genderPilih;
+    private javax.swing.JTextField handphoneInput;
+    private javax.swing.JButton hapusButton;
+    private javax.swing.JButton imporButton;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JComboBox<String> kategoriPilih;
+    private javax.swing.JList<String> kontakList;
+    private javax.swing.JTextField nameInput;
+    private javax.swing.JButton simpanButton;
+    private javax.swing.JButton tambahButton;
+    private javax.swing.JTable tblKontak;
     // End of variables declaration//GEN-END:variables
 }
