@@ -14,7 +14,7 @@ import java.sql.Statement;
  * @author LENOVO
  */
 public class PengelolaanKontakHelper {
-      private static final String DB_URL = "jdbc:mysql://localhost:3306/pbo_lat3";
+      private static final String DB_URL = "jdbc:mysql://localhost:3306/db_lat3";
     private static final String USER = "root";  // Sesuaikan dengan username MySQL Anda
     private static final String PASSWORD = "";  // Sesuaikan dengan password MySQL Anda
 

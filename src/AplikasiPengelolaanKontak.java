@@ -2,7 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
 /**
  *
  * @author LENOVO
@@ -14,8 +29,47 @@ public class AplikasiPengelolaanKontak extends javax.swing.JFrame {
      */
     public AplikasiPengelolaanKontak() {
         initComponents();
+        loadKontakList();
+        loadTableData(); // memuat table data apabila aplikasi di jalankan
+        PengelolaanKontakHelper.createTable();
     }
+    
+     private void clearFields() { // Method Hapus
+    nameInput.setText("");
+    handphoneInput.setText("");
+    alamatInput.setText("");
+    genderPilih.setSelectedIndex(0);
+    kategoriPilih.setSelectedIndex(0);
+    loadTableData(); //Load ulang data setelah method ini dijalankan
+    }
+     private void loadTableData() {
+    DefaultTableModel model = (DefaultTableModel) tblKontak.getModel();
+    model.setRowCount(0);
 
+    String sql = "SELECT nama, telepon, alamat, gender, kategori FROM kontak";
+    try (Connection conn = PengelolaanKontakHelper.connect()) {
+        if (conn == null) {
+            JOptionPane.showMessageDialog(this, "Koneksi ke database gagal.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Menghentikan eksekusi jika koneksi gagal
+        }
+
+        try (java.sql.Statement stmt = conn.createStatement();
+             java.sql.ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("nama"),
+                    rs.getString("telepon"),
+                    rs.getString("alamat"),
+                    rs.getString("gender"),
+                    rs.getString("kategori")
+                });
+            }
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Gagal memuat data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -181,6 +235,11 @@ public class AplikasiPengelolaanKontak extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(255, 153, 153));
         jButton1.setFont(new java.awt.Font("MingLiU_HKSCS-ExtB", 1, 12)); // NOI18N
         jButton1.setText("Keluar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -212,7 +271,7 @@ public class AplikasiPengelolaanKontak extends javax.swing.JFrame {
                                     .addComponent(handphoneInput, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(nameInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                                     .addComponent(kategoriPilih, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(251, 251, 251)
+                                .addGap(275, 275, 275)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -351,45 +410,95 @@ public class AplikasiPengelolaanKontak extends javax.swing.JFrame {
     }//GEN-LAST:event_simpanButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        int selectedRow = tblKontak.getSelectedRow();
+       int selectedRow = tblKontak.getSelectedRow(); // Mendapatkan baris yang dipilih
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Pilih kontak yang ingin diedit!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+            return; // Jika tidak ada baris yang dipilih, keluar dari metode
         }
 
-        String nama = nameInput.getText();
-        String telepon = handphoneInput.getText();
-        String alamat = alamatInput.getText();
-        String gender = genderPilih.getSelectedItem().toString();
-        String kategori = kategoriPilih.getSelectedItem().toString();
-        String oldName = tblKontak.getValueAt(selectedRow, 0).toString();
+        // Mengambil data dari tabel berdasarkan baris yang dipilih
+        String nama = tblKontak.getValueAt(selectedRow, 0).toString();
+        String telepon = tblKontak.getValueAt(selectedRow, 1).toString();
+        String alamat = tblKontak.getValueAt(selectedRow, 2).toString();
+        String gender = tblKontak.getValueAt(selectedRow, 3).toString();
+        String kategori = tblKontak.getValueAt(selectedRow, 4).toString();
 
-        // Warning muncul jika semua textfield kosong atau salah satunya
-        if (nama.isEmpty() || telepon.isEmpty() || kategori.equals("(Pilih Kategori Disini)")) {
-            JOptionPane.showMessageDialog(this, "Semua field harus diisi!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        // Memasukkan data ke dalam input field
+        nameInput.setText(nama);
+        handphoneInput.setText(telepon);
+        alamatInput.setText(alamat);
+        genderPilih.setSelectedItem(gender);
+        kategoriPilih.setSelectedItem(kategori);
 
-        // Memulai proses update kontak
-        String sql = "UPDATE kontak SET nama = ?, telepon = ?, alamat = ?, gender = ?, kategori = ? WHERE nama = ?";
-        try (Connection conn = PengelolaanKontakHelper.connect();
-            java.sql.PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, nama);
-            pstmt.setString(2, telepon);
-            pstmt.setString(5, kategori);
-            pstmt.setString(6, oldName);
-            pstmt.executeUpdate();
+        // Menyimpan perubahan ke database saat tombol Simpan ditekan
+        simpanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                // Memperbarui data di database
+                String newNama = nameInput.getText();
+                String newTelepon = handphoneInput.getText();
+                String newAlamat = alamatInput.getText();
+                String newGender = genderPilih.getSelectedItem().toString();
+                String newKategori = kategoriPilih.getSelectedItem().toString();
 
-            JOptionPane.showMessageDialog(this, "Kontak berhasil diperbarui.");
-            clearFields(); //Method hapus
-            loadTableData(); // Memuat ulang data setelah di update
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Terjadi kesalahan pada pembaharuan kontak: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+                // Validasi input
+                if (newNama.isEmpty() || newTelepon.isEmpty() || newAlamat.isEmpty() || newGender.equals("") || newKategori.equals("")) {
+                    JOptionPane.showMessageDialog(AplikasiPengelolaanKontak.this, "Harap isi semua field!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                // SQL untuk memperbarui data
+                String sql = "UPDATE kontak SET nama = ?, telepon = ?, alamat = ?, gender = ?, kategori = ? WHERE nama = ?";
+                try (Connection conn = PengelolaanKontakHelper.connect();
+                    PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                    pstmt.setString(1, newNama);
+                    pstmt.setString(2, newTelepon);
+                    pstmt.setString(3, newAlamat);
+                    pstmt.setString(4, newGender);
+                    pstmt.setString(5, newKategori);
+                    pstmt.setString(6, nama); // Menggunakan nama lama sebagai kunci pencarian
+                    pstmt.executeUpdate();
+
+                    JOptionPane.showMessageDialog(AplikasiPengelolaanKontak.this, "Kontak berhasil diperbarui.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                    clearFields(); // Mengosongkan field setelah update
+                    loadTableData(); // Memuat ulang data tabel
+                    loadKontakList(); // Memuat ulang daftar kontak
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(AplikasiPengelolaanKontak.this, "Gagal memperbarui kontak: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
+            int selectedRow = tblKontak.getSelectedRow(); // Mendapatkan baris yang dipilih
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih kontak yang ingin dihapus!", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Jika tidak ada baris yang dipilih, keluar dari metode
+        }
 
+        // Mendapatkan nama kontak yang akan dihapus
+        String nama = tblKontak.getValueAt(selectedRow, 0).toString();
+
+        // Konfirmasi sebelum menghapus
+        int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin menghapus kontak " + nama + "?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return; // Jika pengguna tidak mengkonfirmasi, keluar dari metode
+        }
+
+        // SQL untuk menghapus kontak dari database
+        String sql = "DELETE FROM kontak WHERE nama = ?";
+        try (Connection conn = PengelolaanKontakHelper.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, nama); // Mengatur parameter nama
+            pstmt.executeUpdate(); // Eksekusi perintah hapus
+
+            // Beri notifikasi ke pengguna
+            JOptionPane.showMessageDialog(this, "Kontak berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+            loadTableData(); // Memuat ulang data setelah penghapusan
+            loadKontakList(); // Memuat ulang daftar kontak
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Gagal menghapus kontak: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_hapusButtonActionPerformed
 
     private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
@@ -552,6 +661,27 @@ public class AplikasiPengelolaanKontak extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cariInputActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+     private void loadKontakList() {
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        String sql = "SELECT nama FROM kontak";  // Query untuk mengambil nama-nama kontak
+        try (Connection conn = PengelolaanKontakHelper.connect();
+             java.sql.Statement stmt = conn.createStatement();
+             java.sql.ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                listModel.addElement(rs.getString("nama"));  // Menambahkan nama ke dalam model list
+            }
+
+            // Menghubungkan DefaultListModel ke kontakList
+            kontakList.setModel(listModel);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Gagal memuat data nama kontak: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     /**
      * @param args the command line arguments
      */
