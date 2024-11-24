@@ -73,4 +73,4 @@ Aplikasi ini terdiri dari beberapa komponen GUI yang memudahkan pengguna dalam m
    Willy Rahman
 
 ## Demo
-
+![Demo GIF](https://github.com/willyrahman/apkPengelolaanKontak/blob/main/img/demo%20aplikasi%20Pengelolaan%20kontak%20latihan%203.gif)
