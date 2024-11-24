@@ -70,7 +70,7 @@ Aplikasi ini terdiri dari beberapa komponen GUI yang memudahkan pengguna dalam m
    - Ekspor dan impor data kontak sesuai kebutuhan.
 
 ## Pembuat Aplikasi
-   Willy Rahman
+   Willy Rahman - 2210010103
 
 ## Demo
 ![Demo GIF](https://github.com/willyrahman/apkPengelolaanKontak/blob/main/img/demo%20aplikasi%20Pengelolaan%20kontak%20latihan%203.gif)
